@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Producto</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1>Producto</h1>
+        <a th:href="@{/producto/agregar}">Crear Producto</a>
+        <br/>
+        <div th:if="${productos != null and !productos.empty}">
+            <table border="1">
+                <tr>
+                    <th>Cod. Producto</th>
+                    <th>Nombre</th>
+                </tr>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.codProducto}">Mostrar Cod. Producto</td>
+                    <td th:text="${producto.nombre}">Mostrar Nombre</td>
+                    <td th:text="${producto.precio}">Mostrar Nombre</td>
+                    <td> <a th:href="@{/producto/editar/} + ${producto.codProducto}" th:text="Editar"/></td>
+                    <td> <a th:href="@{/producto/eliminar(codProducto=${producto.codProducto})}" th:text="Eliminar"/></td>
+                </tr>
+
+            </table>
+        </div>
+        <div th:if="${productos == null or productos.empty}">
+            La lista de productos está vacía
+        </div>
+        <br/>
+        <a th:href="@{/}">Regresar al Inicio</a>
+    </body>
+</html>

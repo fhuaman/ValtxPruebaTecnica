@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Usuario</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1>Usuario</h1>
+        <a th:href="@{/usuario/agregar}">Crear Usuario</a>
+        <br/>
+        <div th:if="${usuarios != null and !usuarios.empty}">
+            <table border="1">
+                <tr>
+                    <th>Cod. Usuarios</th>
+                    <th>Nombre</th>
+                    <th>User</th>
+                    <th>Password</th>
+                    <th>Sucursal</th>
+                </tr>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.codUsuario}">Mostrar Cod. Usuarios</td>
+                    <td th:text="${usuario.nombre}">Mostrar Usuarios</td>
+                    <td th:text="${usuario.user}">Mostrar Usuarios</td>
+                    <td th:text="${usuario.password}">Mostrar Usuarios</td>
+                    <td th:text="${usuario.sucursal.nombre}">Mostrar Nombre Sucursal</td>
+                    <td> <a th:href="@{/usuario/editar/} + ${usuario.codUsuario}" th:text="Editar"/></td>
+                    <td> <a th:href="@{/usuario/eliminar(codUsuario=${usuario.codUsuario})}" th:text="Eliminar"/></td>
+                </tr>
+
+            </table>
+        </div>
+        <div th:if="${usuarios == null or usuarios.empty}">
+            La lista de usuarios está vacía
+        </div>
+        <br/>
+        <a th:href="@{/}">Regresar al Inicio</a>
+    </body>
+</html>

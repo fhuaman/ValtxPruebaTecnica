@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Sucursal</title>
+        <meta charset="UTF-8" />
+    </head>
+    <body>
+        <h1>Sucursal</h1>
+        <a th:href="@{/sucursal/agregar}">Crear Sucursal</a>
+        <br/>
+        <div th:if="${sucursales != null and !sucursales.empty}">
+            <table border="1">
+                <tr>
+                    <th>Cod. Sucursal</th>
+                    <th>Nombre</th>
+                </tr>
+                <tr th:each="sucursal : ${sucursales}">
+                    <td th:text="${sucursal.codSucursal}">Mostrar Cod. Sucursal</td>
+                    <td th:text="${sucursal.nombre}">Mostrar Nombre</td>
+                    <td> <a th:href="@{/sucursal/editar/} + ${sucursal.codSucursal}" th:text="Editar"/></td>
+                    <td> <a th:href="@{/sucursal/eliminar(codSucursal=${sucursal.codSucursal})}" th:text="Eliminar"/></td>
+                </tr>
+
+            </table>
+        </div>
+        <div th:if="${sucursales == null or sucursales.empty}">
+            La lista de sucursales está vacía
+        </div>
+        <br/>
+        <a th:href="@{/}">Regresar al Inicio</a>
+    </body>
+</html>

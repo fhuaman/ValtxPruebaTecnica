@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Datos del Usuario</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <h1>Datos del Usuario</h1>
+        <a th:href="@{/usuario}">Regresar</a>
+        <br/>
+        <form th:action="@{/usuario/guardar}" method="post" th:object="${usuario}">
+            <input type="hidden" name="codUsuario" th:field="*{codUsuario}" />
+            <br/>
+            <label for="nombre">Nombre:</label>
+            <input type="text" name="nombre" th:field="*{nombre}"/>
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error Nombre</span>
+            <br/>
+            <label for="nombre">User:</label>
+            <input type="text" name="user" th:field="*{user}"/>
+            <span th:if="${#fields.hasErrors('user')}" th:errors="*{user}">Error User</span>
+            <br/>
+            <label for="password">Password:</label>
+            <input type="password" name="password" th:field="*{password}"/>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Error Password</span>
+            <br/>
+            <label for="sucursal">Sucursal:</label>
+            <select th:field="*{sucursal}" id="sucursal">
+                <option th:each="sucursal : ${sucursales}" th:value="${sucursal.codSucursal}" th:text="${sucursal.nombre}">  
+                </option>
+            </select>
+            <br/>
+            <input type="submit" name="guardar"  value="Guardar"/> 
+        </form>
+    </body>
+</html>
